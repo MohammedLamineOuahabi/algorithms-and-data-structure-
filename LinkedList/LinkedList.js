@@ -26,8 +26,30 @@ class LinkedList {
     //  return instance of obj
     return this;
   }
+  pop() {
+    //  if no node exists
+    if (!this.head) return this;
+
+    //  if one node exists
+    if (this.head == this.tail) {
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return this;
+    }
+    //  if more then one node
+    let node = this.head;
+    while (node.next != this.tail) {
+      node = node.next;
+    }
+    this.tail = node;
+    this.tail.next = null;
+    this.length--;
+    return this;
+  }
   unshift(value) {
     //  Create new node
+    let newNode = new Node(value);
   }
   insert(index, value) {
     //  Create new node
@@ -35,6 +57,7 @@ class LinkedList {
 }
 // new keyword call the constructor function in the class
 let myLinkedList = new LinkedList(55);
-myLinkedList.push(56);
-myLinkedList.push(35);
+myLinkedList.push(100);
+myLinkedList.pop();
+
 console.log(JSON.stringify(myLinkedList));
