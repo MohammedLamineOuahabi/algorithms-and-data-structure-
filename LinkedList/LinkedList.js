@@ -4,7 +4,6 @@ class Node {
     this.next = null;
   }
 }
-// let node=new Node(5);
 
 class LinkedList {
   constructor(value) {
@@ -16,6 +15,16 @@ class LinkedList {
   }
   push(value) {
     //  Create new node
+    let newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      this.tail.next = newNode;
+    }
+    this.tail = newNode;
+    this.length++;
+    //  return instance of obj
+    return this;
   }
   unshift(value) {
     //  Create new node
@@ -26,5 +35,6 @@ class LinkedList {
 }
 // new keyword call the constructor function in the class
 let myLinkedList = new LinkedList(55);
-
-console.log(myLinkedList);
+myLinkedList.push(56);
+myLinkedList.push(35);
+console.log(JSON.stringify(myLinkedList));
