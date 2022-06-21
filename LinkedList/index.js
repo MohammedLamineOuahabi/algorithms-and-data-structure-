@@ -85,6 +85,15 @@ class LinkedList {
     }
     return temp;
   }
+  set(index, value) {
+    //  change the value of an element
+    let temp = this.get(index);
+    if (temp) {
+      temp.value = value;
+      return true;
+    }
+    return false;
+  }
 }
 // new keyword call the constructor function in the class
 let myLinkedList = new LinkedList(200);
@@ -92,7 +101,6 @@ myLinkedList.push(100);
 myLinkedList.pop();
 myLinkedList.unshift(300);
 myLinkedList.shift();
-console.log(myLinkedList.get(2));
-console.log(myLinkedList.get(0));
-
+console.log(myLinkedList);
+console.log(myLinkedList.set(0, 99));
 console.log(myLinkedList);
