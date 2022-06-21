@@ -48,7 +48,7 @@ class LinkedList {
     return this;
   }
   unshift(value) {
-    // insert node at the beginning
+    //  Insert node at the beginning
     //  Create new node
     let newNode = new Node(value);
     //  check if LL is empty
@@ -62,11 +62,26 @@ class LinkedList {
     this.length++;
     return this;
   }
+  shift() {
+    //  Remove the first node and RETURNED it
+
+    //  empty list case
+    if (!this.head) return undefined;
+    //  one element list case
+    let temp = this.head;
+    this.head = this.head.next;
+    if (this.length == 1) this.tail = null;
+    this.length--;
+    return temp;
+  }
 }
 // new keyword call the constructor function in the class
 let myLinkedList = new LinkedList(200);
 myLinkedList.push(100);
 myLinkedList.pop();
 myLinkedList.unshift(300);
-
+console.log(myLinkedList);
+console.log(myLinkedList.shift().value);
+console.log(myLinkedList);
+console.log(myLinkedList.shift().value);
 console.log(myLinkedList);
