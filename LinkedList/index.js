@@ -28,7 +28,7 @@ class LinkedList {
   }
   pop() {
     //  if no node exists
-    if (!this.head) return this;
+    if (!this.head) return undefined;
 
     //  if one node exists
     if (this.head == this.tail) {
@@ -48,16 +48,25 @@ class LinkedList {
     return this;
   }
   unshift(value) {
+    // insert node at the beginning
     //  Create new node
     let newNode = new Node(value);
-  }
-  insert(index, value) {
-    //  Create new node
+    //  check if LL is empty
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
   }
 }
 // new keyword call the constructor function in the class
-let myLinkedList = new LinkedList(55);
+let myLinkedList = new LinkedList(200);
 myLinkedList.push(100);
 myLinkedList.pop();
+myLinkedList.unshift(300);
 
-console.log(JSON.stringify(myLinkedList));
+console.log(myLinkedList);
