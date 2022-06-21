@@ -74,14 +74,25 @@ class LinkedList {
     this.length--;
     return temp;
   }
+  get(index) {
+    //  get element in a specific index
+    if (index < 0 || index > this.length - 1) return undefined;
+    let i = 0;
+    let temp = this.head;
+    while (i < index) {
+      temp = temp.next;
+      i++;
+    }
+    return temp;
+  }
 }
 // new keyword call the constructor function in the class
 let myLinkedList = new LinkedList(200);
 myLinkedList.push(100);
 myLinkedList.pop();
 myLinkedList.unshift(300);
-console.log(myLinkedList);
-console.log(myLinkedList.shift().value);
-console.log(myLinkedList);
-console.log(myLinkedList.shift().value);
+myLinkedList.shift();
+console.log(myLinkedList.get(2));
+console.log(myLinkedList.get(0));
+
 console.log(myLinkedList);
