@@ -13,6 +13,7 @@ class LinkedList {
     this.tail = newNode;
     this.length = 1;
   }
+  //  add new node in the tail
   push(value) {
     //  Create new node
     let newNode = new Node(value);
@@ -26,6 +27,8 @@ class LinkedList {
     //  return instance of obj
     return this;
   }
+
+  //  remove node from the tail
   pop() {
     //  if no node exists
     if (!this.head) return undefined;
@@ -47,8 +50,8 @@ class LinkedList {
     this.length--;
     return this;
   }
+  //  Insert node at the beginning
   unshift(value) {
-    //  Insert node at the beginning
     //  Create new node
     let newNode = new Node(value);
     //  check if LL is empty
@@ -62,9 +65,8 @@ class LinkedList {
     this.length++;
     return this;
   }
+  //  Remove the first node and RETURNED it
   shift() {
-    //  Remove the first node and RETURNED it
-
     //  empty list case
     if (!this.head) return undefined;
     //  one element list case
@@ -74,8 +76,8 @@ class LinkedList {
     this.length--;
     return temp;
   }
+  //  get element in a specific index
   get(index) {
-    //  get element in a specific index
     if (index < 0 || index > this.length - 1) return undefined;
     let i = 0;
     let temp = this.head;
@@ -85,22 +87,39 @@ class LinkedList {
     }
     return temp;
   }
+  //  change the value of an element
   set(index, value) {
-    //  change the value of an element
     let temp = this.get(index);
     if (temp) {
       temp.value = value;
       return true;
     }
-    return false;
+    return -1;
+  }
+  //  insert a new element in a specific index
+  insert(index, value) {
+    if (index == 0) return this.unshift(value);
+    if (index == this.length) return this.push(value);
+
+    let temp = this.get(index - 1);
+    if (!temp) {
+      console.log(`${index - 1} element not found!`);
+      return -1;
+    }
+    let newNode = new Node(value);
+    newNode.next = temp.next;
+    temp.next = newNode;
+    this.length++;
+    return this;
   }
 }
 // new keyword call the constructor function in the class
 let myLinkedList = new LinkedList(200);
-myLinkedList.push(100);
-myLinkedList.pop();
-myLinkedList.unshift(300);
-myLinkedList.shift();
-console.log(myLinkedList);
-console.log(myLinkedList.set(0, 99));
+// myLinkedList.push(100);
+// myLinkedList.pop();
+// myLinkedList.unshift(300);
+// myLinkedList.shift();
+// console.log(myLinkedList);
+// console.log(myLinkedList.set(0, 99));
+//myLinkedList.insert(3, 4);
 console.log(myLinkedList);
