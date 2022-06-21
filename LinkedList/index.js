@@ -100,7 +100,7 @@ class LinkedList {
   insert(index, value) {
     if (index == 0) return this.unshift(value);
     if (index == this.length) return this.push(value);
-
+    if (index < 0 || index > this.length - 1) return undefined;
     let temp = this.get(index - 1);
     if (!temp) {
       console.log(`${index - 1} element not found!`);
@@ -112,14 +112,45 @@ class LinkedList {
     this.length++;
     return this;
   }
+  remove(index) {
+    if (index < 0 || index > this.length - 1) return undefined;
+    if (index == 0) return this.shift();
+    if (index == this.length - 1) return this.pop();
+    let temp = this.get(index);
+    if (!temp) return -1;
+    let beforeTemp = this.get(index - 1);
+    beforeTemp.next = temp.next;
+    temp.next = null;
+    this.length--;
+  }
+  reverse() {
+    //  flip head & tail
+    let temp = this.head;
+    this.head = this.tail;
+    this.tail = temp;
+
+    let prev = null;
+    let next = null;
+    for (let i = 0; i < this.length; i++) {
+      next = temp.next;
+      temp.next = prev;
+      prev = temp;
+      temp = next;
+    }
+    return this;
+  }
 }
 // new keyword call the constructor function in the class
-let myLinkedList = new LinkedList(200);
-// myLinkedList.push(100);
+let myLinkedList = new LinkedList(20);
+myLinkedList.push(100);
+myLinkedList.push(200);
+myLinkedList.push(300);
 // myLinkedList.pop();
 // myLinkedList.unshift(300);
 // myLinkedList.shift();
 // console.log(myLinkedList);
 // console.log(myLinkedList.set(0, 99));
 //myLinkedList.insert(3, 4);
-console.log(myLinkedList);
+//myLinkedList.remove(3);
+myLinkedList.reverse();
+console.log(JSON.stringify(myLinkedList, null, 4));
