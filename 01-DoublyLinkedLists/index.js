@@ -38,11 +38,21 @@ class DoublyLinkedList {
     this.length--;
     return this;
   }
+  unshift(value) {
+    let newNode = new Node(value);
+    if (this.length == 0) {
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+    }
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
 }
 
 let dll = new DoublyLinkedList(100);
+dll.unshift(300);
 dll.push(200);
-dll.pop();
-dll.pop();
-dll.pop();
 console.log(dll);
