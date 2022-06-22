@@ -50,9 +50,23 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+  shift() {
+    if (this.length == 0) return undefined;
+    if (this.length == 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      let temp = this.head;
+      this.head = this.head.next;
+      temp.next = null;
+      this.head.prev = null;
+    }
+    this.length--;
+    return this;
+  }
 }
 
 let dll = new DoublyLinkedList(100);
 dll.unshift(300);
-dll.push(200);
+dll.shift();
 console.log(dll);
