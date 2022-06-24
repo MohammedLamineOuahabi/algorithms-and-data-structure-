@@ -67,6 +67,7 @@ class DoublyLinkedList {
   get(index) {
     if (index < 0 || index >= this.length) return undefined;
     let temp;
+    //  more efficient manner than LL
     if (index < this.length / 2) {
       temp = this.head;
       for (let i = 0; i < index; i++) temp = temp.next;
@@ -76,12 +77,55 @@ class DoublyLinkedList {
     }
     return temp;
   }
+  set(index, value) {
+    let temp = this.get(index);
+    if (temp) {
+      temp.value = value;
+      return true;
+    }
+    return false;
+  }
+  insert(index, value) {
+    if (index < 0 || index > this.length) return undefined;
+    if (index == 0) return this.unshift(value);
+    if (index == this.length) return this.push(value);
+    let newNode = new Node(value);
+    let temp = null;
+    if (index > this.length / 2) {
+      temp = this.tail;
+      for (let i = this.length - 1; i > index; i--) temp = temp.prev;
+    } else {
+      temp = this.head;
+      for (let i = 0; i < index; i++) temp = temp.next;
+    }
+    temp.prev.next = newNode;
+    newNode.prev = temp.prev;
+    newNode.next = temp;
+    temp.prev = newNode;
+    this.length++;
+    return this;
+  }
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index == 0) return this.shift();
+    if (index == this.length - 1) return this.pop();
+    let temp = this.get(index);
+
+    temp.prev.next = temp.next;
+    temp.next.prev = temp.prev;
+    temp.rev = null;
+    temp.next = null;
+    this.length--;
+    return this;
+  }
 }
 
 let dll = new DoublyLinkedList(100);
 dll.push(300);
 dll.push(400);
-dll.push(500);
-dll.push(600);
-console.log(dll.get(1));
+//dll.set(1, 600);
+//dll.insert(0, 0);
+//dll.insert(-1, -1);
+//dll.insert(1, 2);
+dll.remove(1);
 console.log(dll);
